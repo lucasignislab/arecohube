@@ -20,6 +20,28 @@ function useMousePosition() {
   return mousePosition
 }
 
+// Animated counter component
+function AnimatedNumber({ value, duration = 2 }) {
+  const count = useMotionValue(0)
+  const rounded = useTransform(count, (latest) => Math.round(latest))
+  const [displayValue, setDisplayValue] = useState(0)
+
+  useEffect(() => {
+    const controls = animate(count, value, {
+      duration: duration,
+      ease: "easeOut",
+    })
+
+    const unsubscribe = rounded.on("change", (v) => setDisplayValue(v))
+    return () => {
+      controls.stop()
+      unsubscribe()
+    }
+  }, [value, duration, count, rounded])
+
+  return <>{displayValue}</>
+}
+
 // Parallax component for hero image
 function ParallaxImage() {
   const mouseX = useMotionValue(0)
@@ -247,7 +269,7 @@ function App() {
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, margin: "-100px" }}
               transition={{ type: 'spring', ...springConfig, delay: 0.2 }}
               whileHover={{ scale: 1.02 }}
               className="glass-card p-8 sm:p-12 text-center bg-white/5"
@@ -259,7 +281,13 @@ function App() {
                 viewport={{ once: true }}
                 transition={{ type: 'spring', stiffness: 200, damping: 10, delay: 0.4 }}
               >
-                42%
+                <motion.span
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                >
+                  <AnimatedNumber value={42} />%
+                </motion.span>
               </motion.div>
               <p className="text-white/70 text-sm sm:text-base">do tempo da equipe de e-commerce é gasto em tarefas repetitivas que o HUBe automatiza.</p>
             </motion.div>
