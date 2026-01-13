@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { motion } from 'framer-motion' // eslint-disable-line no-unused-vars
 import { ArrowLeft, Sparkles, Palette, Code, Lightbulb, Target, Layers, Zap, Users, TrendingUp, CheckCircle2, ExternalLink } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
@@ -35,7 +35,7 @@ function Chapter({ number, title, subtitle }) {
 }
 
 // Highlight card for key decisions
-function DecisionCard({ icon: Icon, title, description, impact }) {
+function DecisionCard({ icon: Icon, title, description, impact }) { // eslint-disable-line no-unused-vars
     return (
         <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-lg transition-shadow">
             <div className="w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center mb-4">
