@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #0F172A;
+  --color-accent: #3B82F6;
+  --color-accent-hover: #2563EB;
+  --color-success: #10B981;
+  --font-sans: 'Inter', system-ui, sans-serif;
+
+  --animate-fade-in: fadeIn 0.8s ease-out forwards;
+  --animate-float: float 6s ease-in-out infinite;
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes float {
+
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-slate-50 text-slate-700 font-sans antialiased;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-white/70 backdrop-blur-lg border border-white/30 rounded-2xl shadow-xl;
+  }
+
+  .btn-primary {
+    @apply bg-accent text-white font-semibold px-6 py-3 rounded-full transition-all duration-300 hover:bg-accent-hover hover:-translate-y-0.5 hover:shadow-lg hover:shadow-accent/30;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-accent to-sky-400 bg-clip-text text-transparent;
+  }
+}
