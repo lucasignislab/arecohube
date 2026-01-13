@@ -1,8 +1,8 @@
-import { motion } from 'framer-motion' // eslint-disable-line no-unused-vars
-import { ArrowLeft, Sparkles, Palette, Code, Lightbulb, Target, Layers, Zap, Users, TrendingUp, CheckCircle2, ExternalLink } from 'lucide-react'
+// eslint-disable-next-line no-unused-vars -- motion é usado via JSX: <motion.section>, <motion.div>
+import { motion } from 'framer-motion'
+import { ArrowLeft, Sparkles, Palette, Code, Lightbulb, Target, Layers, Zap, TrendingUp, CheckCircle2, ExternalLink } from 'lucide-react'
 import { Link } from 'react-router-dom'
-
-const springConfig = { stiffness: 100, damping: 15, mass: 0.5 }
+import { SPRING_CONFIG } from './constants'
 
 // Storytelling section component
 function StorySection({ children, className = '' }) {
@@ -11,7 +11,7 @@ function StorySection({ children, className = '' }) {
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
-            transition={{ type: 'spring', ...springConfig }}
+            transition={{ type: 'spring', ...SPRING_CONFIG }}
             className={`mb-24 ${className}`}
         >
             {children}
@@ -131,10 +131,10 @@ function CaseStudy() {
                         <motion.div
                             initial={{ opacity: 0, y: 50, scale: 0.95 }}
                             animate={{ opacity: 1, y: 0, scale: 1 }}
-                            transition={{ delay: 0.4, type: 'spring', ...springConfig }}
+                            transition={{ delay: 0.4, type: 'spring', ...SPRING_CONFIG }}
                             className="relative max-w-5xl mx-auto"
                         >
-                            <div className="bg-gradient-to-br from-accent/20 to-purple-500/20 p-3 rounded-3xl">
+                            <div className="bg-linear-to-br from-accent/20 to-purple-500/20 p-3 rounded-3xl">
                                 <img
                                     src="/hero-dashboard.png"
                                     alt="Areco HUBe Dashboard"
@@ -162,7 +162,7 @@ function CaseStudy() {
                                     instantânea</strong> para um público exigente e técnico.
                             </p>
 
-                            <div className="bg-gradient-to-r from-red-50 to-amber-50 p-6 rounded-2xl border border-red-100 mb-8">
+                            <div className="bg-linear-to-r from-red-50 to-amber-50 p-6 rounded-2xl border border-red-100 mb-8">
                                 <h4 className="font-bold text-red-800 mb-3 flex items-center gap-2">
                                     <Target size={20} />
                                     O problema central
@@ -217,14 +217,14 @@ function CaseStudy() {
                             <h4 className="text-lg font-semibold mb-4 text-slate-300">Paleta de Cores</h4>
                             <div className="flex flex-wrap gap-4">
                                 <div className="flex items-center gap-3">
-                                    <div className="w-10 h-10 rounded-lg bg-[#0F172A]" />
+                                    <div className="w-10 h-10 rounded-lg bg-primary" />
                                     <div>
                                         <div className="text-sm font-medium">Primary</div>
                                         <div className="text-xs text-slate-400">#0F172A</div>
                                     </div>
                                 </div>
                                 <div className="flex items-center gap-3">
-                                    <div className="w-10 h-10 rounded-lg bg-[#3B82F6]" />
+                                    <div className="w-10 h-10 rounded-lg bg-accent" />
                                     <div>
                                         <div className="text-sm font-medium">Accent</div>
                                         <div className="text-xs text-slate-400">#3B82F6</div>
@@ -238,7 +238,7 @@ function CaseStudy() {
                                     </div>
                                 </div>
                                 <div className="flex items-center gap-3">
-                                    <div className="w-10 h-10 rounded-lg bg-[#10B981]" />
+                                    <div className="w-10 h-10 rounded-lg bg-success" />
                                     <div>
                                         <div className="text-sm font-medium">Success</div>
                                         <div className="text-xs text-slate-400">#10B981</div>
@@ -267,20 +267,20 @@ function CaseStudy() {
                                 </p>
                                 <ul className="space-y-3">
                                     <li className="flex items-start gap-3">
-                                        <CheckCircle2 className="text-emerald-500 mt-1 flex-shrink-0" size={18} />
+                                        <CheckCircle2 className="text-emerald-500 mt-1 shrink-0" size={18} />
                                         <span className="text-slate-600">Headline impactante com gradient text para destaque</span>
                                     </li>
                                     <li className="flex items-start gap-3">
-                                        <CheckCircle2 className="text-emerald-500 mt-1 flex-shrink-0" size={18} />
+                                        <CheckCircle2 className="text-emerald-500 mt-1 shrink-0" size={18} />
                                         <span className="text-slate-600">Parallax no dashboard para profundidade visual</span>
                                     </li>
                                     <li className="flex items-start gap-3">
-                                        <CheckCircle2 className="text-emerald-500 mt-1 flex-shrink-0" size={18} />
+                                        <CheckCircle2 className="text-emerald-500 mt-1 shrink-0" size={18} />
                                         <span className="text-slate-600">CTAs com hierarquia primária/secundária</span>
                                     </li>
                                 </ul>
                             </div>
-                            <div className="bg-gradient-to-br from-slate-100 to-slate-200 p-4 rounded-2xl">
+                            <div className="bg-linear-to-br from-slate-100 to-slate-200 p-4 rounded-2xl">
                                 <img
                                     src="/hero-dashboard.png"
                                     alt="Hero Section"
@@ -322,15 +322,15 @@ function CaseStudy() {
                                 </p>
                                 <ul className="space-y-3">
                                     <li className="flex items-start gap-3">
-                                        <CheckCircle2 className="text-emerald-500 mt-1 flex-shrink-0" size={18} />
+                                        <CheckCircle2 className="text-emerald-500 mt-1 shrink-0" size={18} />
                                         <span className="text-slate-600">Hover com scale e shadow para affordance</span>
                                     </li>
                                     <li className="flex items-start gap-3">
-                                        <CheckCircle2 className="text-emerald-500 mt-1 flex-shrink-0" size={18} />
+                                        <CheckCircle2 className="text-emerald-500 mt-1 shrink-0" size={18} />
                                         <span className="text-slate-600">Click abre modal com preview real da interface</span>
                                     </li>
                                     <li className="flex items-start gap-3">
-                                        <CheckCircle2 className="text-emerald-500 mt-1 flex-shrink-0" size={18} />
+                                        <CheckCircle2 className="text-emerald-500 mt-1 shrink-0" size={18} />
                                         <span className="text-slate-600">Animação de entrada com spring physics</span>
                                     </li>
                                 </ul>
@@ -431,15 +431,15 @@ function CaseStudy() {
                         />
 
                         <div className="grid md:grid-cols-3 gap-6 mb-12">
-                            <div className="bg-gradient-to-br from-emerald-500 to-emerald-600 text-white p-6 rounded-2xl text-center">
+                            <div className="bg-linear-to-br from-emerald-500 to-emerald-600 text-white p-6 rounded-2xl text-center">
                                 <div className="text-4xl font-bold mb-2">7+</div>
                                 <div className="text-emerald-100">Seções Interativas</div>
                             </div>
-                            <div className="bg-gradient-to-br from-accent to-blue-600 text-white p-6 rounded-2xl text-center">
+                            <div className="bg-linear-to-br from-accent to-blue-600 text-white p-6 rounded-2xl text-center">
                                 <div className="text-4xl font-bold mb-2">20+</div>
                                 <div className="text-blue-100">Micro-animações</div>
                             </div>
-                            <div className="bg-gradient-to-br from-purple-500 to-purple-600 text-white p-6 rounded-2xl text-center">
+                            <div className="bg-linear-to-br from-purple-500 to-purple-600 text-white p-6 rounded-2xl text-center">
                                 <div className="text-4xl font-bold mb-2">100%</div>
                                 <div className="text-purple-100">Responsivo</div>
                             </div>
@@ -452,21 +452,21 @@ function CaseStudy() {
                             </h4>
                             <ul className="space-y-4 text-emerald-700">
                                 <li className="flex items-start gap-3">
-                                    <CheckCircle2 className="mt-1 flex-shrink-0" size={18} />
+                                    <CheckCircle2 className="mt-1 shrink-0" size={18} />
                                     <span>
                                         <strong>Animações com propósito:</strong> Cada movimento comunica algo —
                                         atenção, feedback ou hierarquia.
                                     </span>
                                 </li>
                                 <li className="flex items-start gap-3">
-                                    <CheckCircle2 className="mt-1 flex-shrink-0" size={18} />
+                                    <CheckCircle2 className="mt-1 shrink-0" size={18} />
                                     <span>
                                         <strong>Performance importa:</strong> Usar CSS transforms e will-change
                                         estrategicamente evita jank.
                                     </span>
                                 </li>
                                 <li className="flex items-start gap-3">
-                                    <CheckCircle2 className="mt-1 flex-shrink-0" size={18} />
+                                    <CheckCircle2 className="mt-1 shrink-0" size={18} />
                                     <span>
                                         <strong>Design Systems escalam:</strong> Tokens bem definidos no início
                                         economizam horas depois.
@@ -480,7 +480,7 @@ function CaseStudy() {
                 {/* CTA */}
                 <StorySection>
                     <div className="container mx-auto px-6 max-w-4xl text-center">
-                        <div className="bg-gradient-to-br from-primary to-slate-800 text-white p-12 rounded-3xl">
+                        <div className="bg-linear-to-br from-primary to-slate-800 text-white p-12 rounded-3xl">
                             <h2 className="text-3xl font-bold mb-4">Quer ver o código?</h2>
                             <p className="text-slate-300 mb-8 max-w-xl mx-auto">
                                 Todo o projeto está disponível no GitHub, incluindo este Case Study

@@ -1,10 +1,9 @@
+// eslint-disable-next-line no-unused-vars -- motion é usado via JSX: <motion.div>, <motion.a>, etc
 import { motion, AnimatePresence, useMotionValue, useTransform, useSpring, animate, useScroll, useInView } from 'framer-motion'
-import { Package, Users, ClipboardList, Warehouse, Zap, Shield, TrendingUp, Globe, Clock, DollarSign, FileText, UserCheck, RefreshCw, BarChart3, MessageSquare, Phone, Mail, HelpCircle, ExternalLink, ChevronDown } from 'lucide-react'
+import { Package, Users, ClipboardList, Warehouse, Zap, DollarSign, FileText, UserCheck, RefreshCw, BarChart3, MessageSquare, Phone, Mail, HelpCircle, ExternalLink, ChevronDown } from 'lucide-react'
 import { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
-
-// Spring animation config for smoother, more natural animations
-const springConfig = { stiffness: 100, damping: 15, mass: 0.5 }
+import { SPRING_CONFIG, MARKETPLACE_BRANDS } from './constants'
 
 
 
@@ -35,13 +34,20 @@ function AnimatedNumber({ value, duration = 2 }) {
   return <span ref={ref}>{displayValue}</span>
 }
 
-// Parallax component for hero image
+/**
+ * Componente de imagem com efeito parallax 3D baseado no movimento do mouse.
+ * Cria uma sensação de profundidade e interatividade no hero section.
+ */
 function ParallaxImage() {
   const mouseX = useMotionValue(0)
   const mouseY = useMotionValue(0)
 
-  const rotateX = useSpring(useTransform(mouseY, [0, window.innerHeight], [10, -10]), springConfig)
-  const rotateY = useSpring(useTransform(mouseX, [0, window.innerWidth], [-10, 10]), springConfig)
+  // Valores fixos funcionam bem para o efeito parallax
+  const VIEWPORT_HEIGHT = 800
+  const VIEWPORT_WIDTH = 1200
+
+  const rotateX = useSpring(useTransform(mouseY, [0, VIEWPORT_HEIGHT], [10, -10]), SPRING_CONFIG)
+  const rotateY = useSpring(useTransform(mouseX, [0, VIEWPORT_WIDTH], [-10, 10]), SPRING_CONFIG)
 
   useEffect(() => {
     const handleMouseMove = (e) => {
@@ -67,7 +73,7 @@ function ParallaxImage() {
         className="w-full rounded-2xl shadow-2xl shadow-accent/20"
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ type: 'spring', ...springConfig, delay: 0.3 }}
+        transition={{ type: 'spring', ...SPRING_CONFIG, delay: 0.3 }}
         whileHover={{ scale: 1.02 }}
       />
     </motion.div>
@@ -91,7 +97,7 @@ function ProductModal({ isOpen, onClose, imageSrc }) {
         initial={{ scale: 0.9, y: 20 }}
         animate={{ scale: 1, y: 0 }}
         exit={{ scale: 0.9, y: 20 }}
-        transition={{ type: 'spring', ...springConfig }}
+        transition={{ type: 'spring', ...SPRING_CONFIG }}
         onClick={(e) => e.stopPropagation()}
       >
         <button
@@ -151,7 +157,7 @@ function StepsWithProgress() {
 
           {/* Animated progress line */}
           <motion.div
-            className="hidden md:block absolute top-8 left-[12%] h-0.5 bg-gradient-to-r from-accent to-sky-400 -z-10 origin-left"
+            className="hidden md:block absolute top-8 left-[12%] h-0.5 bg-linear-to-r from-accent to-sky-400 -z-10 origin-left"
             style={{
               scaleX,
               width: '76%'
@@ -234,7 +240,7 @@ function InfiniteMovingCards({ items, direction = "left", speed = "fast", pauseO
   return (
     <div
       ref={containerRef}
-      className={`scroller relative z-20 overflow-hidden [mask-image:linear-gradient(to_right,transparent,white_10%,white_90%,transparent)] ${className}`}
+      className={`scroller relative z-20 overflow-hidden mask-[linear-gradient(to_right,transparent,white_10%,white_90%,transparent)] ${className}`}
     >
       <ul
         ref={scrollerRef}
@@ -243,10 +249,10 @@ function InfiniteMovingCards({ items, direction = "left", speed = "fast", pauseO
         {items.map((benefit) => (
           <li
             key={benefit.title}
-            className="w-[350px] max-w-full relative rounded-2xl border border-white/10 px-8 py-6 bg-white/5 backdrop-blur-md flex-shrink-0"
+            className="w-[350px] max-w-full relative rounded-2xl border border-white/10 px-8 py-6 bg-white/5 backdrop-blur-md shrink-0"
           >
             <div className="flex items-center gap-4 mb-4">
-              <div className="w-10 h-10 bg-white/10 text-white rounded-full flex items-center justify-center border border-white/10 flex-shrink-0">
+              <div className="w-10 h-10 bg-white/10 text-white rounded-full flex items-center justify-center border border-white/10 shrink-0">
                 <benefit.icon size={20} />
               </div>
               <h3 className="text-base font-bold leading-tight">{benefit.title}</h3>
@@ -296,7 +302,7 @@ function Footer() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ type: 'spring', ...springConfig }}
+          transition={{ type: 'spring', ...SPRING_CONFIG }}
           className="mb-12"
         >
           <div className="text-3xl font-bold flex items-center gap-2">
@@ -312,7 +318,7 @@ function Footer() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ type: 'spring', ...springConfig, delay: 0.1 }}
+          transition={{ type: 'spring', ...SPRING_CONFIG, delay: 0.1 }}
           className="glass-card mb-16 p-6 sm:p-8 bg-white/5 border-white/10 flex flex-col md:flex-row items-center justify-between gap-6"
         >
           <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8">
@@ -339,7 +345,7 @@ function Footer() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ type: 'spring', ...springConfig, delay: 0.2 + (idx * 0.1) }}
+              transition={{ type: 'spring', ...SPRING_CONFIG, delay: 0.2 + (idx * 0.1) }}
             >
               <h4 className="font-bold text-lg mb-6 pb-2 border-b border-white/10">{section.title}</h4>
               <ul className={`grid gap-4 ${section.columns === 2 ? 'grid-cols-2' : 'grid-cols-1'}`}>
@@ -360,7 +366,7 @@ function Footer() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ type: 'spring', ...springConfig, delay: 0.5 }}
+          transition={{ type: 'spring', ...SPRING_CONFIG, delay: 0.5 }}
           className="mb-8 p-6 bg-white/5 rounded-2xl"
         >
           <h4 className="font-bold text-lg mb-8 flex items-center gap-2">
@@ -426,7 +432,7 @@ function FloatingAI() {
     >
       <div className="w-20 h-20 bg-[#1e293b] rounded-full flex flex-col items-center justify-center shadow-2xl border border-white/10 group overflow-hidden relative cursor-pointer">
         {/* Subtle glow effect on hover */}
-        <div className="absolute inset-0 bg-gradient-to-t from-accent/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        <div className="absolute inset-0 bg-linear-to-t from-accent/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
         <span className="text-3xl font-extrabold text-white leading-none tracking-tight">AI</span>
         <div className="flex flex-col items-center mt-1">
@@ -525,7 +531,7 @@ function App() {
             <motion.div
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ type: 'spring', ...springConfig }}
+              transition={{ type: 'spring', ...SPRING_CONFIG }}
             >
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-4 sm:mb-6">
                 Domine o Multicanal. <br />
@@ -559,11 +565,11 @@ function App() {
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ type: 'spring', ...springConfig, delay: 0.2 }}
+              transition={{ type: 'spring', ...SPRING_CONFIG, delay: 0.2 }}
               className="relative mt-8 lg:mt-0"
             >
               <ParallaxImage />
-              <div className="absolute -bottom-4 -right-4 w-full h-full bg-gradient-to-br from-accent/20 to-sky-400/20 rounded-2xl -z-10 blur-xl" />
+              <div className="absolute -bottom-4 -right-4 w-full h-full bg-linear-to-br from-accent/20 to-sky-400/20 rounded-2xl -z-10 blur-xl" />
             </motion.div>
           </div>
         </div>
@@ -578,16 +584,16 @@ function App() {
           <div className="relative">
             <div className="flex animate-[scroll-left_20s_linear_infinite]">
               {/* First set of brands */}
-              {['Mercado Livre', 'Americanas', 'Amazon', 'Magalu', 'Shopee', 'B2W', 'Via Varejo', 'Carrefour'].map((brand) => (
-                <div key={brand} className="flex-shrink-0 px-8 sm:px-12">
+              {MARKETPLACE_BRANDS.map((brand) => (
+                <div key={brand} className="shrink-0 px-8 sm:px-12">
                   <span className="text-lg sm:text-xl font-bold text-slate-500 opacity-60 whitespace-nowrap">
                     {brand}
                   </span>
                 </div>
               ))}
               {/* Duplicate set for seamless loop */}
-              {['Mercado Livre', 'Americanas', 'Amazon', 'Magalu', 'Shopee', 'B2W', 'Via Varejo', 'Carrefour'].map((brand) => (
-                <div key={`${brand}-duplicate`} className="flex-shrink-0 px-8 sm:px-12">
+              {MARKETPLACE_BRANDS.map((brand) => (
+                <div key={`${brand}-duplicate`} className="shrink-0 px-8 sm:px-12">
                   <span className="text-lg sm:text-xl font-bold text-slate-500 opacity-60 whitespace-nowrap">
                     {brand}
                   </span>
@@ -605,7 +611,7 @@ function App() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ type: 'spring', ...springConfig }}
+            transition={{ type: 'spring', ...SPRING_CONFIG }}
             className="text-center max-w-2xl mx-auto mb-12 sm:mb-16"
           >
             <h2 className="text-3xl sm:text-4xl font-bold text-primary mb-4">Desenhado para a Operação</h2>
@@ -625,7 +631,7 @@ function App() {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ type: 'spring', ...springConfig, delay: i * 0.1 }}
+                transition={{ type: 'spring', ...SPRING_CONFIG, delay: i * 0.1 }}
                 whileHover={{ y: -8, boxShadow: '0 20px 40px -15px rgba(59, 130, 246, 0.2)' }}
                 className="glass-card p-6 sm:p-8 group cursor-pointer flex flex-col h-full"
                 onClick={() => feature.hasModal && setModalImage(feature.modalImage)}
@@ -638,7 +644,7 @@ function App() {
                   <feature.icon size={24} />
                 </motion.div>
                 <h3 className="text-lg sm:text-xl font-bold text-primary mb-3">{feature.title}</h3>
-                <p className="text-sm sm:text-base text-slate-600 mb-4 flex-grow">{feature.desc}</p>
+                <p className="text-sm sm:text-base text-slate-600 mb-4 grow">{feature.desc}</p>
                 {feature.hasModal && (
                   <div className="text-xs text-accent font-semibold flex items-center gap-1 mt-auto">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4">
@@ -672,7 +678,7 @@ function App() {
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ type: 'spring', ...springConfig }}
+              transition={{ type: 'spring', ...SPRING_CONFIG }}
             >
               <h2 className="text-3xl sm:text-4xl font-bold mb-4 sm:mb-6">Por que a gestão manual é o maior inimigo da sua escala?</h2>
               <p className="text-white/70 text-base sm:text-lg mb-6 sm:mb-8">Manter múltiplos canais atualizados sem um Hub integrado gera falhas contínuas que custam caro ao seu negócio.</p>
@@ -687,9 +693,9 @@ function App() {
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
-                    transition={{ type: 'spring', ...springConfig, delay: i * 0.1 }}
+                    transition={{ type: 'spring', ...SPRING_CONFIG, delay: i * 0.1 }}
                   >
-                    <div className="w-8 h-8 bg-accent/20 rounded-full flex items-center justify-center flex-shrink-0">
+                    <div className="w-8 h-8 bg-accent/20 rounded-full flex items-center justify-center shrink-0">
                       <div className="w-2 h-2 bg-accent rounded-full" />
                     </div>
                     <div>
@@ -705,7 +711,7 @@ function App() {
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true, margin: "-100px" }}
-              transition={{ type: 'spring', ...springConfig, delay: 0.2 }}
+              transition={{ type: 'spring', ...SPRING_CONFIG, delay: 0.2 }}
               whileHover={{ scale: 1.02 }}
               className="glass-card p-8 sm:p-12 text-center bg-white/5"
             >
@@ -737,7 +743,7 @@ function App() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ type: 'spring', ...springConfig }}
+            transition={{ type: 'spring', ...SPRING_CONFIG }}
             className="text-center max-w-2xl mx-auto mb-12 sm:mb-16"
           >
             <h2 className="text-3xl sm:text-4xl font-bold text-primary mb-4">Simplicidade em cada etapa</h2>
@@ -758,7 +764,7 @@ function App() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ type: 'spring', ...springConfig }}
+            transition={{ type: 'spring', ...SPRING_CONFIG }}
             className="text-center max-w-2xl mx-auto mb-12 sm:mb-16"
           >
             <h2 className="text-3xl sm:text-4xl font-bold mb-4">Benefícios do Areco HUBe</h2>
@@ -782,13 +788,13 @@ function App() {
 
       {/* CTA Final */}
       <section className="py-16 sm:py-24 relative">
-        <div className="absolute inset-0 -z-10 bg-gradient-to-br from-accent/5 to-sky-400/5" />
+        <div className="absolute inset-0 -z-10 bg-linear-to-br from-accent/5 to-sky-400/5" />
         <div className="container mx-auto px-4 sm:px-6 text-center max-w-3xl">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ type: 'spring', ...springConfig }}
+            transition={{ type: 'spring', ...SPRING_CONFIG }}
           >
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-primary mb-4 sm:mb-6">Pronto para transformar sua escala digital?</h2>
             <p className="text-base sm:text-lg text-slate-600 mb-8 sm:mb-10">Junte-se a centenas de empresas que já automatizaram sua operação com o Areco HUBe.</p>

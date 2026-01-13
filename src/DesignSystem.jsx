@@ -1,8 +1,8 @@
+// eslint-disable-next-line no-unused-vars -- motion é usado via JSX: <motion.section>, <motion.div>
 import { motion } from 'framer-motion'
-import { ArrowLeft, Palette, Type, Grid3X3, Layers, Box, BookOpen, Code, Settings, MessageSquare, Sun, Moon, Check, X, AlertCircle, Loader2, ChevronRight } from 'lucide-react'
+import { ArrowLeft, Palette, Type, Grid3X3, Layers, Box, BookOpen, Code, Settings, MessageSquare, Sun, Moon, Check, X, Loader2, ChevronRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
-
-const springConfig = { stiffness: 100, damping: 15, mass: 0.5 }
+import { SPRING_CONFIG } from './constants'
 
 // Color swatch component
 function ColorSwatch({ name, hex, textColor = 'white' }) {
@@ -20,19 +20,20 @@ function ColorSwatch({ name, hex, textColor = 'white' }) {
 }
 
 // Section wrapper
-function Section({ id, title, icon: Icon, children }) {
+// eslint-disable-next-line no-unused-vars
+function Section({ id, title, icon: SectionIcon, children }) {
     return (
         <motion.section
             id={id}
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
-            transition={{ type: 'spring', ...springConfig }}
+            transition={{ type: 'spring', ...SPRING_CONFIG }}
             className="mb-20"
         >
             <div className="flex items-center gap-3 mb-8">
                 <div className="w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center">
-                    <Icon className="text-accent" size={20} />
+                    <SectionIcon className="text-accent" size={20} />
                 </div>
                 <h2 className="text-2xl font-bold text-primary">{title}</h2>
             </div>
@@ -173,7 +174,7 @@ function DesignSystem() {
                         </Subsection>
 
                         <Subsection title="Declaração de Propósito">
-                            <div className="bg-gradient-to-r from-accent/5 to-sky-400/5 p-6 rounded-2xl border border-accent/10">
+                            <div className="bg-linear-to-r from-accent/5 to-sky-400/5 p-6 rounded-2xl border border-accent/10">
                                 <p className="text-slate-700 leading-relaxed">
                                     O <strong>Areco HUBe Design System</strong> existe para resolver o problema da
                                     fragmentação visual e da inconsistência entre produtos. Ele serve como a
@@ -690,7 +691,7 @@ function DesignSystem() {
 
                         <Subsection title="Storybook & Playground">
                             <div className="grid md:grid-cols-2 gap-6">
-                                <div className="bg-gradient-to-br from-pink-500 to-orange-500 p-6 rounded-xl text-white">
+                                <div className="bg-linear-to-br from-pink-500 to-orange-500 p-6 rounded-xl text-white">
                                     <span className="text-3xl mb-4 block">📕</span>
                                     <h4 className="font-bold text-xl mb-2">Storybook</h4>
                                     <p className="text-white/80 text-sm mb-4">Visualize todos os componentes em ambiente isolado com controles interativos.</p>
@@ -698,7 +699,7 @@ function DesignSystem() {
                                         Acessar Storybook →
                                     </button>
                                 </div>
-                                <div className="bg-gradient-to-br from-violet-500 to-blue-500 p-6 rounded-xl text-white">
+                                <div className="bg-linear-to-br from-violet-500 to-blue-500 p-6 rounded-xl text-white">
                                     <span className="text-3xl mb-4 block">🎮</span>
                                     <h4 className="font-bold text-xl mb-2">Playground</h4>
                                     <p className="text-white/80 text-sm mb-4">Teste componentes em tempo real com código editável e preview instantâneo.</p>
