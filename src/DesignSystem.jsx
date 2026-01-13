@@ -256,6 +256,25 @@ function DesignSystem() {
                         </Subsection>
 
                         <Subsection title="Tipografia">
+                            <div className="mb-8">
+                                <h4 className="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-4">Família Tipográfica</h4>
+                                <div className="bg-white p-6 rounded-xl border border-slate-200 flex items-center justify-between">
+                                    <div className="flex items-center gap-6">
+                                        <span className="text-6xl font-bold text-primary">Aa</span>
+                                        <div>
+                                            <div className="text-2xl font-bold text-primary">Inter</div>
+                                            <p className="text-sm text-slate-500">Sans-serif • Google Fonts</p>
+                                        </div>
+                                    </div>
+                                    <div className="hidden md:block max-w-xs text-xs text-slate-400 font-mono leading-relaxed">
+                                        ABCDEFGHIJKLMNOPQRSTUVWXYZ<br />
+                                        abcdefghijklmnopqrstuvwxyz<br />
+                                        0123456789!@#$%^&*()
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h4 className="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-4">Escalas e Estilos</h4>
                             <div className="space-y-6 bg-white p-6 rounded-xl border border-slate-200">
                                 <div className="flex items-baseline justify-between pb-4 border-b border-slate-100">
                                     <div>

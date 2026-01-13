@@ -490,13 +490,13 @@ function App() {
                       >
                         Design System
                       </Link>
-                      <a
-                        href="#"
+                      <Link
+                        to="/case-study"
                         className="block px-4 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 hover:text-accent transition-colors"
                         onClick={() => setIsRecruiterMenuOpen(false)}
                       >
                         Case Study
-                      </a>
+                      </Link>
                     </motion.div>
                   </>
                 )}
@@ -514,7 +514,7 @@ function App() {
       </header>
 
       {/* Hero Section */}
-      <section className="pt-24 sm:pt-32 pb-16 sm:pb-20 relative overflow-hidden">
+      <section className="pt-24 sm:pt-32 pb-16 sm:pb-20 relative overflow-hidden bg-primary text-white">
         <div className="absolute inset-0 -z-10">
           <div className="absolute top-1/4 right-1/4 w-64 sm:w-96 h-64 sm:h-96 bg-accent/10 rounded-full blur-3xl" />
           <div className="absolute bottom-1/4 left-1/4 w-48 sm:w-64 h-48 sm:h-64 bg-sky-400/10 rounded-full blur-3xl" />
@@ -527,11 +527,11 @@ function App() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ type: 'spring', ...springConfig }}
             >
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-primary leading-tight mb-4 sm:mb-6">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-4 sm:mb-6">
                 Domine o Multicanal. <br />
                 <span className="gradient-text">Escale com Inteligência.</span>
               </h1>
-              <p className="text-base sm:text-lg text-slate-600 mb-6 sm:mb-8 max-w-lg">
+              <p className="text-base sm:text-lg text-white/70 mb-6 sm:mb-8 max-w-lg">
                 O Hub de integração que conecta seu ERP Areco aos maiores marketplaces do mundo em tempo real. Elimine o retrabalho e venda mais.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
@@ -547,7 +547,7 @@ function App() {
                 </motion.a>
                 <motion.a
                   href="#integracoes"
-                  className="px-6 py-3 rounded-full border border-slate-300 text-slate-700 font-semibold hover:bg-slate-100 transition-colors text-center"
+                  className="px-6 py-3 rounded-full border border-white/20 text-white font-semibold hover:bg-white/10 transition-colors text-center"
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.98 }}
                 >
